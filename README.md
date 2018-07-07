@@ -16,4 +16,4 @@ Roadmap:
 
 ---
 
-![Alt text](src/Images/daily-react-31-bezier-curve-app.png?raw=true "App UI")
+![Alt text](src/images/daily-react-31-bezier-curve-app.png?raw=true "App UI")
