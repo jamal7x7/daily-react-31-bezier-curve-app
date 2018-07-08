@@ -24,16 +24,19 @@ const Items = (props) => (
 
       <circle cx='100' cy='150' r='5' fill='purple'/>
       <circle cx='200' cy='200' r='5' fill='purple'/>
-      <circle cx='130' cy='280' r='5' fill='purple'/> */}
+    <circle cx='130' cy='280' r='5' fill='purple'/> */}
+    { (props.points.length > 0) && <circle cx={props.points[0][0]} cy={props.points[0][1]} r='5' fill='violet'/>}
+       
+       
+    <path d={ props.start.join(' ') + props.straight.join(' ')} stroke='none' fill='#041A3E' opacity='0.3'/>
+    <path d={ props.start.join(' ') + props.straight.join(' ')} stroke='white' fill='none' />
 
-      { (props.points.length > 0) && <circle cx={props.points[0][0]} cy={props.points[0][1]} r='5' fill='violet'/>}
 
-      { props.verticesAdded.map( (v, i) => {
-        return <circle key= {i} cx={v[0]} cy={v[1]} r='5' fill='violet'/>
-      })}
+    { props.verticesAdded.map( (v, i) => {
+      return <circle key= {i} cx={v[0]} cy={v[1]} r='5' fill='violet' />
+    })}
 
-      
-      <path d={ props.start.join(' ') + props.straight.join(' ')} stroke='white' fill='none' />
+    
    
       
       
