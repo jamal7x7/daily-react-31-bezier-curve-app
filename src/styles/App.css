@@ -59,6 +59,12 @@ body {
   background: rgba(0, 0, 0, 0.07);
 }
 
+.App-container .side-bar .reset {
+  background: #073175;
+  padding: 20px;
+  cursor: pointer;
+}
+
 .App-container .artboard {
   -ms-grid-row: 1;
   -ms-grid-column: 2;

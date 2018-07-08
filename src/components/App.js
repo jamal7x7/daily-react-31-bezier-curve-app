@@ -12,7 +12,7 @@ const Items = (props) => (
 
     <svg className='svg' viewBox='0 0 1000 700'  height= '700' width= '1000' >
 
-      <path d='M 10 20 C 100 150 200 200 130 280 ' 
+      {/* <path d='M 10 20 C 100 150 200 200 130 280 ' 
         stroke='pink' 
         fill='none' 
       />
@@ -24,7 +24,7 @@ const Items = (props) => (
 
       <circle cx='100' cy='150' r='5' fill='purple'/>
       <circle cx='200' cy='200' r='5' fill='purple'/>
-      <circle cx='130' cy='280' r='5' fill='purple'/>
+      <circle cx='130' cy='280' r='5' fill='purple'/> */}
 
       { (props.points.length > 0) && <circle cx={props.points[0][0]} cy={props.points[0][1]} r='5' fill='violet'/>}
 
@@ -42,11 +42,11 @@ const Items = (props) => (
   </div>
 )
 
-const Menu = () => (
+const Menu = (props) => (
   <div className='side-bar'>
     <div className='menu-icones'>
 
-      Menu
+      <div className="reset" onClick={props.reset}>reset</div>
 
     </div>
   </div>
@@ -119,13 +119,27 @@ class BezierCurveApp extends Component {
 
   }
 
+  reset = (e) => {
+
+    e.preventDefault()
+    this.setState( () =>  ({
+      verticesAdded: [],
+      straight: [],
+      start:[]
+    }))
+    
+    console.log('reset')
+  }
+
 
   render () {
     return (
       <div 
       className='App-container'>
 
-        <Menu />
+        <Menu 
+          reset={this.reset}
+        />
         <Items 
           points={this.state.points}
           verticesAdded={this.state.verticesAdded}
@@ -133,6 +147,7 @@ class BezierCurveApp extends Component {
           start={this.state.start}
           handleMouseMove={this.handleMouseMove}
           handleClick={this.handleClick}
+          
         />
 
       </div>
