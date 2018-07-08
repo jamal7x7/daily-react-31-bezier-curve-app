@@ -27,6 +27,10 @@ const Items = (props) => (
       <circle cx='130' cy='280' r='5' fill='purple'/>
 
       { (props.c.length > 0) && <circle cx={props.c[0][0]} cy={props.c[0][1]} r='5' fill='violet'/>}
+
+      { props.circlesAdded.map( (circle) => {
+        return <circle key= {circle[0]} cx={circle[0]} cy={circle[1]} r='5' fill='violet'/>
+      })}
       
       
       
@@ -48,7 +52,9 @@ class BezierCurveApp extends Component {
   
   state = {
     pointX: 0,
-    c: []
+    c: [],
+    circlesAdded: []
+
   }
   
 
@@ -83,8 +89,20 @@ class BezierCurveApp extends Component {
 
   }
 
-  handleClick (e) {
+  handleClick =(e) => {
     console.log('click')
+    const svg = document.body.querySelector('svg')
+    const rect = svg.getBoundingClientRect()
+
+    let x = e.nativeEvent.clientX - rect.left
+    let y = e.nativeEvent.clientY - rect.top
+    this.setState( (prevState) =>  ({
+            circlesAdded: [...prevState.circlesAdded, [x, y]]
+          })
+    )
+    console.log(this.state.circlesAdded)
+
+
   }
 
 
@@ -96,6 +114,7 @@ class BezierCurveApp extends Component {
         <Menu />
         <Items 
           c={this.state.c}
+          circlesAdded={this.state.circlesAdded}
           handleMouseMove={this.handleMouseMove}
           handleClick={this.handleClick}
         />
