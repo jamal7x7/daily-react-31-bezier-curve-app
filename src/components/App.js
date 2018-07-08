@@ -28,9 +28,13 @@ const Items = (props) => (
 
       { (props.points.length > 0) && <circle cx={props.points[0][0]} cy={props.points[0][1]} r='5' fill='violet'/>}
 
-      { props.circlesAdded.map( (circle, i) => {
-        return <circle key= {i} cx={circle[0]} cy={circle[1]} r='5' fill='violet'/>
+      { props.verticesAdded.map( (v, i) => {
+        return <circle key= {i} cx={v[0]} cy={v[1]} r='5' fill='violet'/>
       })}
+
+      
+      <path d={ props.start.join(' ') + props.straight.join(' ')} stroke='white' fill='none' />
+   
       
       
       
@@ -53,7 +57,9 @@ class BezierCurveApp extends Component {
   state = {
     pointX: 0,
     points: [],
-    circlesAdded: []
+    verticesAdded: [],
+    straight: [],
+    start: []
 
   }
   
@@ -97,10 +103,18 @@ class BezierCurveApp extends Component {
     let x = e.nativeEvent.clientX - rect.left
     let y = e.nativeEvent.clientY - rect.top
     this.setState( (prevState) =>  ({
-            circlesAdded: [...prevState.circlesAdded, [x, y]]
+            verticesAdded: [...prevState.verticesAdded, [x, y]]
           })
     )
-    console.log(this.state.circlesAdded)
+    this.setState( (prevState) =>  ({
+            straight: [...prevState.straight, 'L', x, y]
+          })
+    )
+    this.setState( () =>  ({
+            start: ['M', x, y]
+          })
+    )
+    console.log(this.state.straight)
 
 
   }
@@ -114,7 +128,9 @@ class BezierCurveApp extends Component {
         <Menu />
         <Items 
           points={this.state.points}
-          circlesAdded={this.state.circlesAdded}
+          verticesAdded={this.state.verticesAdded}
+          straight={this.state.straight}
+          start={this.state.start}
           handleMouseMove={this.handleMouseMove}
           handleClick={this.handleClick}
         />
