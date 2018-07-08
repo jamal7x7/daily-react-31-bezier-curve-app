@@ -28,8 +28,8 @@ const Items = (props) => (
 
       { (props.points.length > 0) && <circle cx={props.points[0][0]} cy={props.points[0][1]} r='5' fill='violet'/>}
 
-      { props.circlesAdded.map( (circle) => {
-        return <circle key= {circle[0]} cx={circle[0]} cy={circle[1]} r='5' fill='violet'/>
+      { props.circlesAdded.map( (circle, i) => {
+        return <circle key= {i} cx={circle[0]} cy={circle[1]} r='5' fill='violet'/>
       })}
       
       
